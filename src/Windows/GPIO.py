@@ -1,4 +1,5 @@
-import pyautogui, tkinter, subprocess, os
+#!/usr/bin/env python3
+import tkinter, subprocess, os
 
 #ディレクトリ情報
 dire = os.getcwd().replace(os.path.sep, '/')
@@ -75,7 +76,7 @@ if __name__ == "__main__":
     body.configure(background = 'white')
     body.geometry("1000x800") # ウィンドウサイズ
     body.resizable(0,0) # リサイズ禁止
-    body.iconbitmap("icon.ico")
+    # body.iconbitmap(f"{dire}/icon.ico")
     
     #メニューボタン
     menu_bar = tkinter.Menu(body)
