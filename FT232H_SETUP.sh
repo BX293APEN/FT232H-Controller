@@ -25,7 +25,7 @@ device_rules_create(){
 
 sudo apt update
 
-apt_package_install libusb-1.0
+apt_package_install libusb-1.0                      # 公式ドキュメント用
 apt_package_install libusb-1.0-0 libusb-1.0-0-dev
 
 pids=("6001" "6011" "6010" "6014" "6015")
