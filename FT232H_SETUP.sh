@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-apt_has() { 
-    ( apt-cache show "$1" >/dev/null 2>&1 );
+apt_package_install() {
+    if apt list 2>/dev/null | grep -q "^$1/"; then
+        sudo apt install -y "$@"
+        return 0
+    fi
+    return 1
 }
 
 device_rules_create(){
@@ -21,14 +25,8 @@ device_rules_create(){
 
 sudo apt update
 
-if apt_has libusb-1.0 >/dev/null 2>&1; then
-    sudo apt install -y libusb-1.0
-elif apt_has libusb-1.0-0 >/dev/null 2>&1; then
-    sudo apt install -y libusb-1.0-0 libusb-1.0-0-dev
-else
-    echo "libusb package not found" >&2
-    exit 1
-fi
+apt_package_install libusb-1.0
+apt_package_install libusb-1.0-0 libusb-1.0-0-dev
 
 pids=("6001" "6011" "6010" "6014" "6015")
 
