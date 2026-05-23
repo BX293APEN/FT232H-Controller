@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-apt_package_install() {
-    if apt list 2>/dev/null | grep -q "^$1/"; then
-        sudo apt install -y "$@"
-        return 0
-    fi
-    return 1
-}
-
 device_rules_create(){
     local path="$1"
     local subsystem="${2:-usb}"
@@ -24,9 +16,7 @@ device_rules_create(){
 }
 
 sudo apt update
-
-apt_package_install libusb-1.0                      # 公式ドキュメント用
-apt_package_install libusb-1.0-0 libusb-1.0-0-dev
+sudo apt install libusb-1.0-0 libusb-1.0-0-dev -y
 
 pids=("6001" "6011" "6010" "6014" "6015")
 
