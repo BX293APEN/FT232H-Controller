@@ -2,7 +2,7 @@
 set -euo pipefail
 
 apt_has() { 
-    apt-cache show "$1" >/dev/null 2>&1 || true; 
+    ( apt-cache show "$1" >/dev/null 2>&1 );
 }
 
 device_rules_create(){
